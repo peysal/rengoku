@@ -10,15 +10,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(DefaultApiController.class)
-class DefaultApiControllerTest {
+@WebMvcTest(HelloController.class)
+class HelloControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     void testGetHello() throws Exception {
-        mockMvc.perform(get("/default"))
+        mockMvc.perform(get("/hello"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("hellooo"))
                 .andExpect(jsonPath("$", hasEntry("message", "hellooo")));

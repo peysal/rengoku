@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/default")
-public class DefaultApiController {
+@RequestMapping("/hello")
+public class HelloController {
 
     @GetMapping
     public Map<String, String> getHello() {
