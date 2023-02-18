@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/rengoku")
+@RequestMapping("/default")
 public class DefaultApiController {
 
     @GetMapping
