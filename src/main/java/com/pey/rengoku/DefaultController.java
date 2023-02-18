@@ -1,8 +1,11 @@
 package com.pey.rengoku;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,11 +17,11 @@ public class DefaultController {
     public ResponseEntity<Map<String, String>> getDefault(@RequestParam(required = false) String optionalParam,
                                                           @RequestParam String mandatoryParam,
                                                           @RequestHeader(value = "correlationId", required = true) String correlationId,
-                                                          @RequestHeader(value = "dateTime", required = false) String dateTime) {
+                                                          @RequestHeader(value = "dateTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime dateTime) {
         Map<String, String> response = new HashMap<>();
         response.put("optionalParam", optionalParam);
         response.put("mandatoryParam", mandatoryParam);
-        return ResponseEntity.ok().header("correlationId", correlationId).header("dateTime", dateTime).body(response);
+        return ResponseEntity.ok().header("correlationId", correlationId).header("dateTime", dateTime.format(DateTimeFormatter.ISO_ZONED_DATE_TIME)).body(response);
     }
 
     @PostMapping
