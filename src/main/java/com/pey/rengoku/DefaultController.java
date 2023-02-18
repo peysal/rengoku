@@ -13,34 +13,34 @@ public class DefaultController {
     @GetMapping
     public ResponseEntity<Map<String, String>> getDefault(@RequestParam(required = false) String optionalParam,
                                                           @RequestParam String mandatoryParam,
-                                                          @RequestHeader(value = "Correlation-Id", required = true) String correlationId,
-                                                          @RequestHeader(value = "Timestamp", required = false) String timestamp) {
+                                                          @RequestHeader(value = "correlationId", required = true) String correlationId,
+                                                          @RequestHeader(value = "dateTime", required = false) String dateTime) {
         Map<String, String> response = new HashMap<>();
         response.put("optionalParam", optionalParam);
         response.put("mandatoryParam", mandatoryParam);
-        return ResponseEntity.ok().header("Correlation-Id", correlationId).header("Timestamp", timestamp).body(response);
+        return ResponseEntity.ok().header("correlationId", correlationId).header("dateTime", dateTime).body(response);
     }
 
     @PostMapping
     public ResponseEntity<Map<String, String>> postDefault(@RequestBody Map<String, String> request,
-                                                           @RequestHeader(value = "Correlation-Id", required = true) String correlationId,
-                                                           @RequestHeader(value = "Timestamp", required = false) String timestamp) {
-        return ResponseEntity.ok().header("Correlation-Id", correlationId).header("Timestamp", timestamp).body(request);
+                                                           @RequestHeader(value = "correlationId", required = true) String correlationId,
+                                                           @RequestHeader(value = "dateTime", required = false) String dateTime) {
+        return ResponseEntity.ok().header("correlationId", correlationId).header("dateTime", dateTime).body(request);
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> deleteDefault(@RequestHeader(value = "Correlation-Id", required = true) String correlationId,
-                                              @RequestHeader(value = "Timestamp", required = false) String timestamp) {
-        return ResponseEntity.noContent().header("Correlation-Id", correlationId).header("Timestamp", timestamp).build();
+    public ResponseEntity<Void> deleteDefault(@RequestHeader(value = "correlationId", required = true) String correlationId,
+                                              @RequestHeader(value = "dateTime", required = false) String dateTime) {
+        return ResponseEntity.noContent().header("correlationId", correlationId).header("dateTime", dateTime).build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Map<String, String>> putDefault(@PathVariable String id,
                                                           @RequestBody Map<String, String> request,
-                                                          @RequestHeader(value = "Correlation-Id", required = true) String correlationId,
-                                                          @RequestHeader(value = "Timestamp", required = false) String timestamp) {
+                                                          @RequestHeader(value = "correlationId", required = true) String correlationId,
+                                                          @RequestHeader(value = "dateTime", required = false) String dateTime) {
         request.put("id", id);
-        return ResponseEntity.ok().header("Correlation-Id", correlationId).header("Timestamp", timestamp).body(request);
+        return ResponseEntity.ok().header("correlationId", correlationId).header("dateTime", dateTime).body(request);
     }
 }
 
