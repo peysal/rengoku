@@ -27,23 +27,23 @@ public class DefaultController {
     @PostMapping
     public ResponseEntity<Map<String, String>> postDefault(@RequestBody Map<String, String> request,
                                                            @RequestHeader(value = "correlationId", required = true) String correlationId,
-                                                           @RequestHeader(value = "dateTime", required = false) String dateTime) {
-        return ResponseEntity.ok().header("correlationId", correlationId).header("dateTime", dateTime).body(request);
+                                                           @RequestHeader(value = "dateTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime dateTime) {
+        return ResponseEntity.ok().header("correlationId", correlationId).header("dateTime", dateTime.format(DateTimeFormatter.ISO_ZONED_DATE_TIME)).body(request);
     }
 
     @DeleteMapping
     public ResponseEntity<Void> deleteDefault(@RequestHeader(value = "correlationId", required = true) String correlationId,
-                                              @RequestHeader(value = "dateTime", required = false) String dateTime) {
-        return ResponseEntity.noContent().header("correlationId", correlationId).header("dateTime", dateTime).build();
+                                              @RequestHeader(value = "dateTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime dateTime) {
+        return ResponseEntity.noContent().header("correlationId", correlationId).header("dateTime", dateTime.format(DateTimeFormatter.ISO_ZONED_DATE_TIME)).build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Map<String, String>> putDefault(@PathVariable String id,
                                                           @RequestBody Map<String, String> request,
                                                           @RequestHeader(value = "correlationId", required = true) String correlationId,
-                                                          @RequestHeader(value = "dateTime", required = false) String dateTime) {
+                                                          @RequestHeader(value = "dateTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime dateTime) {
         request.put("id", id);
-        return ResponseEntity.ok().header("correlationId", correlationId).header("dateTime", dateTime).body(request);
+        return ResponseEntity.ok().header("correlationId", correlationId).header("dateTime", dateTime.format(DateTimeFormatter.ISO_ZONED_DATE_TIME)).body(request);
     }
 }
 
