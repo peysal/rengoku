@@ -29,7 +29,7 @@ public class DefaultControllerTest {
 
     @Test
     public void testGetDefault() throws Exception {
-        ZonedDateTime dateTime = ZonedDateTime.now(ZoneId.of("Asia/Kuala_Lumpur"));
+        ZonedDateTime dateTime = ZonedDateTime.of(2022, 1, 1, 12, 0, 0, 0, ZoneId.of("Asia/Kuala_Lumpur"));
         String dateTimeString = dateTime.format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
         MvcResult result = mockMvc.perform(get("/default")
                         .param("mandatoryParam", "mandatoryValue")
